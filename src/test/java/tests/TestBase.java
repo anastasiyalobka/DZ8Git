@@ -22,12 +22,12 @@ public class TestBase {
         String login = credentials.login();
         String password = credentials.password();
         String url = credentials.url();
+        String browser = credentials.browser();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
+        Configuration.browser = browser;
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-
         Configuration.browserCapabilities = capabilities;
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub/", login, password, url);
 

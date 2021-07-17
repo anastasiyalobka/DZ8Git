@@ -26,6 +26,7 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
+            "org.aeonbits.owner:owner:1.0.12",
 
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
@@ -38,6 +39,8 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    systemProperty("browser", System.getProperty("browser", "opera"))
     useJUnitPlatform()
 
     testLogging {
@@ -48,3 +51,5 @@ tasks.withType(Test) {
         }
     }
 }
+
+

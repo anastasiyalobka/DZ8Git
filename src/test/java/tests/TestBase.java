@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static config.Credentials.credentials;
 
 public class TestBase {
     @BeforeAll
@@ -18,6 +19,9 @@ public class TestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.startMaximized = true;
+        String login = credentials.login();
+        String password = credentials.password();
+        String url = credentials.url();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -25,7 +29,8 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
 
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
+        Configuration.remote = String.format("https://%s:%s@%s/wd/hub/", login, password, url);
+
     }
 
     @AfterEach

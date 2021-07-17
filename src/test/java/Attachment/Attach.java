@@ -6,7 +6,6 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,6 +17,8 @@ import java.nio.charset.StandardCharsets;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
+import static config.Credentials.credentials;
+
 
     public class Attach {
         @Attachment(value = "{attachName}", type = "text/plain")
@@ -70,7 +71,8 @@ import static org.openqa.selenium.logging.LogType.BROWSER;
         }
 
         public static URL getVideoUrl(String sessionId) {
-            String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4";
+            String url = credentials.url();
+            String videoUrl = String.format("https://%s/video/" + sessionId + ".mp4", url);
 
             try {
                 return new URL(videoUrl);

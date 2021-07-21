@@ -11,13 +11,13 @@ import pages.RegistrationPageObject;
 
 import static io.qameta.allure.Allure.step;
 
-public class PracticeForm extends TestBase {
+public class PracticeFormNoGender extends TestBase {
     Faker faker = new Faker();
 
     String  firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             email = faker.internet().emailAddress(),
-            gender = "Female",
+            gender = "",
             mobile = faker.phoneNumber().subscriberNumber(10),
             monthOfBirth = "May",
             yearOfBirth = "2004",
